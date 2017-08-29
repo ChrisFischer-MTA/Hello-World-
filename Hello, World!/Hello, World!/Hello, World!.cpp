@@ -3,14 +3,14 @@
 // 8/28/2017
 // Valencia Community College
 
-#include "stdafx.h"
+#include "stdafx.h";
 #include <time.h>
 #include <iostream>
 #include <malloc.h>
 #include <Windows.h>
 
 
-// Uses puts, which for a variety of reasons I feel is useless in the real world.
+// Uses puts.
 void outSloppy(char* phrase) {
 	puts(phrase);
 	Sleep(200);
@@ -21,39 +21,86 @@ void outClean(char* phrase) {
 	printf(phrase);
 	Sleep(200);
 }
-// Returns a random int, allowing mod and sum to be two different controls on that int.
-int getRandInt(int mod, int sum) {
-	// I waste CPU cycles by doing the function this way.
-	// But this is just easier to write and this doesn't
-	// matter.
+// Returns a random int, allowing mod and sum to determain range.
+int getRand(int mod, int sum) {
 	return (rand() % mod) + sum;
 }
 // Uses printf, choosing random characters and backing out until it has the correct one.
 void printRandom(char phrase[]) {
 	// Its easier just to pass in the char array.
 	printf("\n");
-	for (int i = 0; phrase[i+1] != '\0'; i++) {
-		char r = getRandInt(90, 32);
-		printf("%c", r);
+	for (int i = 0; phrase[i + 1] != '\0'; i++) {
+		char randomCharacter = getRand(90, 32);
+		printf("%c", randomCharacter);
 		do
-		{	printf("\b");
-			r = getRandInt(90, 32);
-			printf("%c", r);
+		{
+			printf("\b");
+			randomCharacter = getRand(90, 32);
+			printf("%c", randomCharacter);
 			Sleep(3);
-		} while (r != phrase[i]);
+		} while (randomCharacter != phrase[i]);
 		//printf("\nEquals, %i  %i\n", (int)((r % 90) + 33, (int)*phrase));
-		}
-	printf("\n");
 	}
+	printf("\n");
+}
+// Creates a folder in working dir with the system command.
+void printFolder(char phrase[]) {
+	// offset is length of the command.
+	const int offset = sizeof("mkdir \"") - 1;;
+	char command[40] = "mkdir \"";
+	for (int i = 0; phrase[i] != '\0'; i++) {
+		command[i + offset] = phrase[i];
+
+		// Are we on our last letter?
+		if (phrase[i + 1] == '\0') {
+			command[i + offset] = '\"';
+		}
+	}
+	system(command);
+}
+// Function creates a txt and a dat file containing the string.
+void printToFile(char phrase[]) {
+	const char datName[8] = "buf.dat"; // hehe
+	const char* writingMode = "a";
+	FILE* stream = fopen(datName, writingMode);
+	fprintf(stream, phrase);
+	fclose(stream);
+}
+// Asks if you like pie. Demonstration of simple input/output and an switch statement.
+void doYouLikePie(int counter) {
+	if (counter == 3) {
+		// Wherever we take input, sometimes we get unexpected results.
+		// So we'll ask the user three times then just quit if it doesn't work.
+		return;
+	}
+	printf("\nDo you like pie?\n");
+	char response[50];
+	scanf("%s", response);
+	switch (response[0]) {
+	case 'y':
+	case 'Y':
+		printf("I like pie too!");
+		break;
+	case 'n':
+	case 'N':
+		printf("You heathen! How could you.");
+		break;
+	default:
+		printf("I didn't understand that.");
+		doYouLikePie(counter + 1);
+	}
+	printf("\n");
+}
+
 int main()
 {
 	// Need to do the srand to init seed program wide.
 	srand(time(NULL));
-	
+
 	// Declare our greetings.
 	char greetings[3][20] = { "Hello, World!\n", "'ello, Mate!\n", "'ello, Poppet!\n" };
 	// Store into a pointer as it's easier to write.
-	char* greeting = greetings[getRandInt(3,0)];
+	char* greeting = greetings[getRand(3, 0)];
 
 	// Function calls. 
 	outSloppy(greeting);
@@ -62,20 +109,24 @@ int main()
 	Sleep(300);
 	printRandom(greeting);
 	Sleep(300);
-	char* buffer = "esd";
-	scanf(buffer);
+	printFolder(greeting);
+	Sleep(300);
+	doYouLikePie(0);
+	Sleep(300);
+	printToFile(greeting);
+	Sleep(300);
+
+	// Buffer keeps it from closing right away.
+	char response[50];
+	scanf("%s", response);
 	return 0;
 }
 
 
 
 /*
-Sources.
-
-Overall, I used stack exchange for a few things. A lot of the ideas came organically from my head, but I do occasionally either run into syntatical issues or I'm missing a piece of knowledge
-(like in printRandom, I didn't know about how to back up in stdout.)
-
 The sources below are broken up by function and what specifically I used them for.
 
+printToFile - Computer Science, A Structured Approach to C pages 400-403. Taught me to use fputs
 
 */
