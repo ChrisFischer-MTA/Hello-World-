@@ -56,9 +56,11 @@ int main()
 
 	// Function calls. 
 	outSloppy(greeting);
+	Sleep(200);
 	outClean(greeting);
+	Sleep(200);
 	printRandom(greeting);
-
+	Sleep(200);
 	char* buffer = "esd";
 	scanf(buffer);
 	return 0;
