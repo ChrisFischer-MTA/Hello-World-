@@ -66,7 +66,7 @@ void printToFile(char phrase[]) {
 	fprintf(stream, phrase);
 	fclose(stream);
 }
-// Asks if you like pie. Demonstration of simple input/output and an switch statement.
+// Asks if you like pie. Demonstration of simple input/output and an switch statement & recursion.
 void doYouLikePie(int counter) {
 	if (counter == 3) {
 		// Wherever we take input, sometimes we get unexpected results.
@@ -90,6 +90,36 @@ void doYouLikePie(int counter) {
 		doYouLikePie(counter + 1);
 	}
 	printf("\n");
+}
+// Helper function.
+int zeroOne(char c) {
+	switch (c) {
+	case '1':
+		return 1;
+		break;
+	default:
+		return 0;
+		break;
+	}
+}
+// Takes in eight ASCII ones and zeros and turns it into the character.
+void binaryInput() {
+	printf("\nPlease put in eight ones and zeros.\n");
+	char response[16];
+	scanf("%s", response);
+	printf("%s", response);
+	char asciiChar = 0;
+	for (int i = 7; i >= 0; i--) {
+		// This is a spegetti statement, so I'll break it down here.
+		// We're adding to the integer value of final.
+		// We find out if it's a zero or a one.
+		// We then multiply that int by 2 to the power of
+		// it's place.
+		printf("\nAdding %i  -   The current index is %i, and the current number is %i, power is %i", ((zeroOne(response[i]))*(2 ^ (8 - i))), (i), zeroOne(response[i]), ((2 ^ (8 - i))));
+		asciiChar += ((zeroOne(response[i])))*(2 ^(8 - i));
+	}
+	printf("%i", asciiChar);
+	printf("%c", asciiChar);
 }
 
 int main()
@@ -115,6 +145,7 @@ int main()
 	Sleep(300);
 	printToFile(greeting);
 	Sleep(300);
+	binaryInput();
 
 	// Buffer keeps it from closing right away.
 	char response[50];
