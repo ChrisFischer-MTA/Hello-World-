@@ -15,7 +15,8 @@ void outSloppy(char* phrase) {
 	puts(phrase);
 	Sleep(200);
 }
-// Uses printf, which is more useful then puts but can be a security risk if you code it like I have.
+// Uses printf, which is more useful then puts but is be a security risk if you code it like I have.
+// (if you're wondering what I'm talking about, change one of the greetings to a word then %i%i%i%i%i)
 void outClean(char* phrase) {
 	printf(phrase);
 	Sleep(200);
@@ -56,11 +57,11 @@ int main()
 
 	// Function calls. 
 	outSloppy(greeting);
-	Sleep(200);
+	Sleep(300);
 	outClean(greeting);
-	Sleep(200);
+	Sleep(300);
 	printRandom(greeting);
-	Sleep(200);
+	Sleep(300);
 	char* buffer = "esd";
 	scanf(buffer);
 	return 0;
