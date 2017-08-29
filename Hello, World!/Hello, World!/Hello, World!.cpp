@@ -20,12 +20,14 @@ void outClean(char* phrase) {
 	printf(phrase);
 	Sleep(200);
 }
+// Returns a random int, allowing mod and sum to be two different controls on that int.
 int getRandInt(int mod, int sum) {
 	// I waste CPU cycles by doing the function this way.
 	// But this is just easier to write and this doesn't
 	// matter.
 	return (rand() % mod) + sum;
 }
+// Uses printf, choosing random characters and backing out until it has the correct one.
 void printRandom(char phrase[]) {
 	// Its easier just to pass in the char array.
 	printf("\n");
@@ -36,7 +38,7 @@ void printRandom(char phrase[]) {
 		{	printf("\b");
 			r = getRandInt(90, 32);
 			printf("%c", r);
-			Sleep(1);
+			Sleep(3);
 		} while (r != phrase[i]);
 		//printf("\nEquals, %i  %i\n", (int)((r % 90) + 33, (int)*phrase));
 		}
@@ -61,3 +63,16 @@ int main()
 	scanf(buffer);
 	return 0;
 }
+
+
+
+/*
+Sources.
+
+Overall, I used stack exchange for a few things. A lot of the ideas came organically from my head, but I do occasionally either run into syntatical issues or I'm missing a piece of knowledge
+(like in printRandom, I didn't know about how to back up in stdout.)
+
+The sources below are broken up by function and what specifically I used them for.
+
+
+*/
