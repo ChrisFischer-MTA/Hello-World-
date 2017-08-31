@@ -37,7 +37,7 @@ void printRandom(char phrase[]) {
 			printf("\b");
 			randomCharacter = getRand(90, 32);
 			printf("%c", randomCharacter);
-			Sleep(3);
+			Sleep(6);
 		} while (randomCharacter != phrase[i]);
 		//printf("\nEquals, %i  %i\n", (int)((r % 90) + 33, (int)*phrase));
 	}
@@ -196,23 +196,23 @@ int main()
 
 	// Function calls. 
 	outSloppy(greeting);
-	Sleep(300);
+	Sleep(2000);
 	outClean(greeting);
-	Sleep(300);
+	Sleep(2000);
 	printRandom(greeting);
-	Sleep(300);
+	Sleep(2000);
 	printFolder(greeting);
-	Sleep(300);
+	Sleep(2000);
 	doYouLikePie(0);
-	Sleep(300);
+	Sleep(2000);
 	printToFile(greeting);
-	Sleep(300);
+	Sleep(2000);
 	binaryInput();
-	Sleep(1500);
+	Sleep(2000);
 	rightLeftCenter(greeting);
-	Sleep(900);
+	Sleep(2000);
 	triangle(greeting);
-	Sleep(900);
+	Sleep(2000);
 	binaryOutput(greeting, 0, getSize(greeting));
 	Sleep(0);
 
