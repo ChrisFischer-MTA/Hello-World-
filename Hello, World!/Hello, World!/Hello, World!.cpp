@@ -104,7 +104,7 @@ int zeroOne(char c) {
 }
 // Math has a pow function, but I'd rather write my own.
 int pow(int x, int y) {
-	if (y == 0) {
+	if (y == 0 || y < 0) {
 		return 1;
 	}
 	else {
@@ -124,9 +124,66 @@ void binaryInput() {
 		currentValue = currentValue*(pow(2, (7 - i)));
 		returnedSum += currentValue;
 	}
-	printf("%c\n", returnedSum);
+	printf("The ASCII equivelent of what you typed is (assuming it's printable) -%c\n\n", returnedSum);
 }
+// Function should get a byte (taken as a char) and print out the binary value
+void binaryOutput(char* phrase, int x, int length) {
+	if (x == 0) {
+		printf("This function translates ASCII back to binary and outputs it -");
+	}
+	if (x == length || x > length)
+		return;
+	int c = phrase[x];
+	char arr[10];
+	memset(arr, 0, 9);
+	for (int i = 7; i >= 0; i--) {
+		// We can safely assume 8, as that's the max char can hold.
+		if (pow(2, i) <= c) {
+			arr[7-i] = '1';
+			c -= pow(2, i);
+		}
+		else {
+			arr[7-i] = '0';
+		}
+	}
+	printf("%s ",arr);
+	binaryOutput(phrase, x + 1, length);
+}
+// Function should demonstrate printf spacers just because why not.
+void rightLeftCenter(char* phrase) {
+	printf("Go away I say!");
+	printf("%60s\n", phrase);
+	printf("Come back!");
+	printf("%18s\n", phrase);
+}
+// Function should make a nice looking triangle.
+void triangle(char* phrase) {
+	int length = 0;
+	for (int i = 0; phrase[i] != '\0'; i++) {
+		if (phrase[i + 1] == '\0')
+			length = i;
+	}
+	for (int i = 1; i < length+1; i++) {
+		printf("%*c\n", -(length / length-i)+1, phrase[i-1]);
+	}
+	for (int i = 0; i < 3; i++) {
+		printf("\n");
+	}
 
+	for (int i = length; i >= 0; i--) {
+		printf("%*c\n", -(length / length - i) + 1, phrase[i - 1]);
+	}
+}
+// Function to get length of char array with spaces as sizeof doesn't work for me.
+int getSize(char* phrase) {
+	for (int i = 0; phrase[i] != '\0'; i++) {
+		if (phrase[i + 1] == '\0'){
+			return i;
+		}
+	
+	}
+	return -1;
+}
 int main()
 {
 	// Need to do the srand to init seed program wide.
@@ -151,6 +208,13 @@ int main()
 	printToFile(greeting);
 	Sleep(300);
 	binaryInput();
+	Sleep(1500);
+	rightLeftCenter(greeting);
+	Sleep(900);
+	triangle(greeting);
+	Sleep(900);
+	binaryOutput(greeting, 0, getSize(greeting));
+	Sleep(0);
 
 	// Buffer keeps it from closing right away.
 	char response[50];
@@ -164,5 +228,6 @@ int main()
 The sources below are broken up by function and what specifically I used them for.
 
 printToFile - Computer Science, A Structured Approach to C pages 400-403. Taught me to use fputs
+randomCharacter - Learned the backspace from stdout from stack exchaange.
 
 */
