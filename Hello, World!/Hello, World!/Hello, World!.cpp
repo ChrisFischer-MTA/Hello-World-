@@ -102,24 +102,29 @@ int zeroOne(char c) {
 		break;
 	}
 }
+// Math has a pow function, but I'd rather write my own.
+int pow(int x, int y) {
+	if (y == 0) {
+		return 1;
+	}
+	else {
+		return x*pow(x, y - 1);
+	}
+}
 // Takes in eight ASCII ones and zeros and turns it into the character.
 void binaryInput() {
 	printf("\nPlease put in eight ones and zeros.\n");
-	char response[16];
+	char response[9];
 	scanf("%s", response);
-	printf("%s", response);
-	char asciiChar = 0;
+	int currentValue = 0;
+	int returnedSum = 0;
 	for (int i = 7; i >= 0; i--) {
-		// This is a spegetti statement, so I'll break it down here.
-		// We're adding to the integer value of final.
-		// We find out if it's a zero or a one.
-		// We then multiply that int by 2 to the power of
-		// it's place.
-		printf("\nAdding %i  -   The current index is %i, and the current number is %i, power is %i", ((zeroOne(response[i]))*(2 ^ (8 - i))), (i), zeroOne(response[i]), ((2 ^ (8 - i))));
-		asciiChar += ((zeroOne(response[i])))*(2 ^(8 - i));
+		//printf("\n\nIteration of loop- %i\n", i);
+		currentValue = zeroOne(response[i]);
+		currentValue = currentValue*(pow(2, (7 - i)));
+		returnedSum += currentValue;
 	}
-	printf("%i", asciiChar);
-	printf("%c", asciiChar);
+	printf("%c\n", returnedSum);
 }
 
 int main()
