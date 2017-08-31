@@ -57,7 +57,7 @@ void printFolder(char phrase[]) {
 		}
 	}
 	system(command);
-}
+}   
 // Function creates a txt and a dat file containing the string.
 void printToFile(char phrase[]) {
 	const char datName[8] = "buf.dat"; // hehe
@@ -184,6 +184,26 @@ int getSize(char* phrase) {
 	}
 	return -1;
 }
+// Gets input and reads it backwards.
+void goBackwards() {
+	char response[30];
+	printf("\n\nType something and I'll malform it. (No spaces please...)\n");
+	printf("Backwards - ");
+	scanf("%s", response);
+	for (int i = getSize(response); i >= 0; i--) {
+		printf("%c",response[i]);
+	}
+	printf(" \n");
+	printf("\nEvery odd letter - ");
+	for (int i = 1; i < getSize(response); i+=2) {
+			printf("%c", response[i]);
+	}
+	printf("\n\nEvery even letter - ");
+	for (int i = 0; i < getSize(response); i += 2) {
+		printf("%c", response[i]);
+	}
+}
+
 int main()
 {
 	// Need to do the srand to init seed program wide.
@@ -214,11 +234,12 @@ int main()
 	triangle(greeting);
 	Sleep(2000);
 	binaryOutput(greeting, 0, getSize(greeting));
-	Sleep(0);
+	Sleep(300);
+	goBackwards();
 
 	// Buffer keeps it from closing right away.
 	char response[50];
-	scanf("%s", response);
+	scanf("%s%s%s%s%s%s", response);
 	return 0;
 }
 
