@@ -129,7 +129,7 @@ void binaryInput() {
 // Function should get a byte (taken as a char) and print out the binary value
 void binaryOutput(char* phrase, int x, int length) {
 	if (x == 0) {
-		printf("This function translates ASCII back to binary and outputs it -");
+		printf("This function translates the current hello world phrase that is stored in ASCII back to binary and outputs it -");
 	}
 	if (x == length || x > length)
 		return;
@@ -151,18 +151,41 @@ void binaryOutput(char* phrase, int x, int length) {
 }
 // Function should demonstrate printf spacers just because why not.
 void rightLeftCenter(char* phrase) {
-	printf("Go away I say!");
+	printf("Prift left.");
 	printf("%60s\n", phrase);
-	printf("Come back!");
+	printf("Print Near.");
 	printf("%18s\n", phrase);
 }
-// Function should make a nice looking triangle.
-void triangle(char* phrase) {
+// Function should make a nice looking diamond.
+void diamond(char* phrase) {
 	int length = 0;
 	for (int i = 0; phrase[i] != '\0'; i++) {
 		if (phrase[i + 1] == '\0')
 			length = i;
+		printf("%i\n",length);
 	}
+	for (int index = 0; index < length; index++) {
+		// i is treated as offset from center.
+		for (int vertical = -(length); vertical <= length*2; vertical++) {
+			printf(" ");
+			if (vertical == ((length/2) - index) || vertical == ((length/2) + index)) {
+				printf("%c", phrase[index]);
+			}
+		}
+		printf("\n");
+	}
+	printf("\n");
+	for (int index = length; index >= 0; index--) {
+		// i is treated as offset from center.
+		for (int vertical = -(length); vertical <= length*2; vertical++) {
+			printf(" ");
+			if (vertical == ((length/2) - index) || vertical == ((length/2) + index)) {
+				printf("%c", phrase[index]);
+			}
+		}
+		printf("\n");
+	}
+	/*
 	for (int i = 1; i < length+1; i++) {
 		printf("%*c\n", -(length / length-i)+1, phrase[i-1]);
 	}
@@ -172,7 +195,7 @@ void triangle(char* phrase) {
 
 	for (int i = length; i >= 0; i--) {
 		printf("%*c\n", -(length / length - i) + 1, phrase[i - 1]);
-	}
+	}*/
 }
 // Function to get length of char array with spaces as sizeof doesn't work for me.
 int getSize(char* phrase) {
@@ -231,7 +254,7 @@ int main()
 	Sleep(2000);
 	rightLeftCenter(greeting);
 	Sleep(2000);
-	triangle(greeting);
+	diamond(greeting);
 	Sleep(2000);
 	binaryOutput(greeting, 0, getSize(greeting));
 	Sleep(300);
