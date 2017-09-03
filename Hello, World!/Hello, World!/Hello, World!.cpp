@@ -8,7 +8,7 @@
 #include <iostream>
 #include <malloc.h>
 #include <Windows.h>
-
+const int __sleeptime__ = 300;
 
 // Uses puts.
 void outSloppy(char* phrase) {
@@ -185,17 +185,6 @@ void diamond(char* phrase) {
 		}
 		printf("\n");
 	}
-	/*
-	for (int i = 1; i < length+1; i++) {
-		printf("%*c\n", -(length / length-i)+1, phrase[i-1]);
-	}
-	for (int i = 0; i < 3; i++) {
-		printf("\n");
-	}
-
-	for (int i = length; i >= 0; i--) {
-		printf("%*c\n", -(length / length - i) + 1, phrase[i - 1]);
-	}*/
 }
 // Function to get length of char array with spaces as sizeof doesn't work for me.
 int getSize(char* phrase) {
@@ -239,30 +228,32 @@ int main()
 
 	// Function calls. 
 	outSloppy(greeting);
-	Sleep(2000);
+	Sleep(__sleeptime__);
 	outClean(greeting);
-	Sleep(2000);
+	Sleep(__sleeptime__);
 	printRandom(greeting);
-	Sleep(2000);
+	Sleep(__sleeptime__);
 	printFolder(greeting);
-	Sleep(2000);
+	Sleep(__sleeptime__);
 	doYouLikePie(0);
-	Sleep(2000);
+	Sleep(__sleeptime__);
 	printToFile(greeting);
-	Sleep(2000);
+	Sleep(__sleeptime__);
 	binaryInput();
-	Sleep(2000);
+	Sleep(__sleeptime__);
 	rightLeftCenter(greeting);
-	Sleep(2000);
+	Sleep(__sleeptime__);
 	diamond(greeting);
-	Sleep(2000);
+	Sleep(__sleeptime__);
 	binaryOutput(greeting, 0, getSize(greeting));
-	Sleep(300);
+	Sleep(__sleeptime__);
 	goBackwards();
+	Sleep(__sleeptime__);
 
 	// Buffer keeps it from closing right away.
 	char response[50];
-	scanf("%s%s%s%s%s%s", response);
+	printf("\n");
+	system("pause");
 	return 0;
 }
 
