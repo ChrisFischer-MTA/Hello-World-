@@ -1,13 +1,13 @@
+#include <time.h>
+#include <iostream>
+#include <malloc.h>
+#include <Windows.h>
+
 // Hello, World!.cpp : How many different ways can I write my greetings to the world.
 // Christopher Fischer
 // 8/28/2017
 // Valencia Community College
 
-#include "stdafx.h";
-#include <time.h>
-#include <iostream>
-#include <malloc.h>
-#include <Windows.h>
 const int __sleeptime__ = 300;
 
 // Uses puts.
@@ -162,7 +162,6 @@ void diamond(char* phrase) {
 	for (int i = 0; phrase[i] != '\0'; i++) {
 		if (phrase[i + 1] == '\0')
 			length = i;
-		printf("%i\n",length);
 	}
 	for (int index = 0; index < length; index++) {
 		// i is treated as offset from center.
@@ -261,8 +260,6 @@ int main()
 
 /*
 The sources below are broken up by function and what specifically I used them for.
-
 printToFile - Computer Science, A Structured Approach to C pages 400-403. Taught me to use fputs
 randomCharacter - Learned the backspace from stdout from stack exchaange.
-
 */
